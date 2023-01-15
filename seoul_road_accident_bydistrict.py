@@ -19,7 +19,7 @@ st.markdown('<style>section[data-testid="stSidebar"]{background-color: #dfdedd;}
 st.title("서울시 교통사고 현황")
 
 
-# data & setup
+# ========== data & setup
 @st.cache
 def load_data():
     df = pd.read_csv("https://raw.githubusercontent.com/ArubaKLM/Viz-Practice/main/road_accident_data.csv")
