@@ -63,13 +63,13 @@ subtitle = "2007~2021년 서울시 자치구별" + Harm.lower() + Category.lower
 st.write("")
 
 # Dictionaries
-display_dict = {"jong":"종로", "jungg":"중구", "yong":"용산", 
-                "sungd":"성동", "gwang":"광진", "dongd":"동대문", "jungr":"중랑", 
-                "sungb":"성북", "gangb":"강북", "dob":"도봉", "now":"노원", 
-                "eun":"은평", "seod":"서대문", "ma":"마포", 
-                "yang":"양천", "gangs":"강서", "gur":"구로", "gum":"금천", 
-                "yeong":"영등포", "dongj":"동작", "gwan":"관악", 
-                "seo":"서초", "gangn":"강남", "song":"송파", "gangd":"강동"}
+display_dict = {'jong':'종로', 'jungg':'중구', 'yong':'용산', 
+                'sungd':'성동', 'gwang':'광진', 'dongd':'동대문', 'jungr':'중랑', 
+                'sungb':'성북', 'gangb':'강북', 'dob':'도봉', 'now':'노원', 
+                'eun':'은평', 'seod':'서대문', 'ma':'마포', 
+                'yang':'양천', 'gangs':'강서', 'gur':'구로', 'gum':'금천', 
+                'yeong':'영등포', 'dongj':'동작', 'gwan':'관악', 
+                'seo':'서초', 'gangn':'강남', 'song':'송파', 'gangd':'강동'}
 
 # =========== VISUALISATION
 
