@@ -34,7 +34,7 @@ df = load_data()
 
 # ========== SIDEBAR
 # Customise map
-st.sidebar.subheader("커스텀 디자인 만들기")
+st.sidebar.subheader("디자인 조정")
 
 with st.form(key = 'Form1'):
     with st.sidebar:
