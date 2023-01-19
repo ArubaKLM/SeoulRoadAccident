@@ -1,2 +1,3 @@
 #requirements for streamlit app
 matplotlib
+openpyxl
