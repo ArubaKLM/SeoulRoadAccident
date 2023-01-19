@@ -1,4 +1,4 @@
 #requirements for streamlit app
 matplotlib
 openpyxl
-matplotlib.font_manager
+plt.rcParams['font.family'] = 'NanumGothic'
