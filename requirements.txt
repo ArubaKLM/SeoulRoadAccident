@@ -1,8 +1,4 @@
 #requirements for streamlit app
 matplotlib
 openpyxl
-matplotlib.pyplot
-matplotlib.style
-numpy
-pandas
-openpyxl
+
