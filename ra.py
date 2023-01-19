@@ -60,7 +60,7 @@ with st.form(key='columns_in_form'):
     with col2:
         harm = st.radio("harm", ('totalcase', 'injury', 'death'))
     submitted = st.form_submit_button('적용하기')
-    # 기간 추가해서 조정할 수 있도록 해보자
+    # 기간 추가해서 조정할 수 있도록 수정 예쩡
 
 footer = "원데이터: https://data.seoul.go.kr/dataList/322/S/2/datasetView.do \n제작: 윤준식 | Lisa Hornung의 https://github.com/liloho/london-cycling-rates 프로젝트를 참고하여 제작함"
 subtitle = "2007~2021년 서울시 자치구별 " + category.lower() + " " + harm.lower() # ex 차대차 사망건수
