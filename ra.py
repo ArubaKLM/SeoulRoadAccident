@@ -8,6 +8,7 @@ import openpyxl as op
 import matplotlib.font_manager as fm
 
 # 설치된 폰트 출력
+mpl.style.use('seaborn-pastel')
 plt.rcParams['axes.unicode_minus'] = False
 
 fm.get_fontconfig_fonts()
