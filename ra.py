@@ -1,5 +1,6 @@
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+import matplotlib.style
 import streamlit as st
 import numpy as np
 import pandas as pd
@@ -8,7 +9,11 @@ import matplotlib.font_manager as fm
 
 # 설치된 폰트 출력
 plt.rcParams['axes.unicode_minus'] = False
-plt.rcParams['font.family'] = 'NanumGothic'
+
+fm.get_fontconfig_fonts()
+font_location = './NanumBarunGothicLight.ttf' 
+font_name = fm.FontProperties(fname=font_location).get_name()
+matplotlib.rc('font', family=font_name)
 
 # 세팅 불러오기
 st.set_page_config(
