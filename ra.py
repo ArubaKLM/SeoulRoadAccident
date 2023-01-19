@@ -27,7 +27,7 @@ st.title("서울시 교통사고 현황")
 # ========== data & setup
 @st.cache
 def load_data():
-    df = pd.read_csv("https://raw.githubusercontent.com/ArubaKLM/Viz-Practice/main/road_accident_wide.csv", encoding='cp949')
+    df = pd.read_csv("https://raw.githubusercontent.com/ArubaKLM/Viz-Practice/main/road_accident_data.csv", encoding='cp949')
     return df
 
 df = load_data() 
@@ -56,9 +56,9 @@ with st.form(key='columns_in_form'):
     st.markdown('데이터 탐색하기')
     col1, col2 = st.columns(2)
     with col1:
-        category = st.radio("category",('합계', '차대사람', '차대차', '차량단독'))
+        category = st.radio("category",('total', 'CtoP', 'CtoC', 'CarOnly'))
     with col2:
-        harm = st.radio("harm", ('발생건수(건)', '부상자수(명)', '사망자수(명)'))
+        harm = st.radio("harm", ('totalcase', 'injury', 'death'))
     submitted = st.form_submit_button('적용하기')
     # 기간 추가해서 조정할 수 있도록 해보자
 
