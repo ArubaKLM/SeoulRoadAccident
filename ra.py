@@ -27,7 +27,7 @@ st.title("서울시 교통사고 현황")
 # ========== data & setup
 @st.cache
 def load_data():
-    df = pd.read_csv("https://raw.githubusercontent.com/ArubaKLM/Viz-Practice/main/road_accident_data.csv")
+    df = pd.read_csv("https://raw.githubusercontent.com/ArubaKLM/Viz-Practice/main/road_accident_wide.csv", encoding='cp949')
     return df
 
 df = load_data() 
@@ -56,14 +56,14 @@ with st.form(key='columns_in_form'):
     st.markdown('데이터 탐색하기')
     col1, col2 = st.columns(2)
     with col1:
-        Harm = st.radio("harm",('totalcase', 'injured', 'death'))
+        category = st.radio("category",('합계', '차대사람', '차대차', '차량단독'))
     with col2:
-        Category = st.radio("category", ('total', 'CtoP', 'CtoC', 'CarOnly'))
+        harm = st.radio("harm", ('발생건수(건)', '부상자수(명)', '사망자수(명)'))
     submitted = st.form_submit_button('적용하기')
     # 기간 추가해서 조정할 수 있도록 해보자
 
-footer = "원데이터: https://data.seoul.go.kr/dataList/322/S/2/datasetView.do \n 제작: 윤준식 | Lisa Hornung의 https://github.com/liloho/london-cycling-rates 프로젝트를 참고하여 제작함"
-subtitle = "2007~2021년 서울시 자치구별" + Harm.lower() + Category.lower() # ex 차대차 사망건수
+footer = "원데이터: https://data.seoul.go.kr/dataList/322/S/2/datasetView.do \n제작: 윤준식 | Lisa Hornung의 https://github.com/liloho/london-cycling-rates 프로젝트를 참고하여 제작함"
+subtitle = "2007~2021년 서울시 자치구별" + category.lower() + " " + harm.lower() # ex 차대차 사망건수
 
 st.write("")
 
@@ -83,7 +83,7 @@ display_dict = {'jong':'종로', 'jungg':'중구', 'yong':'용산',
 ## Plotting
 #filter data set based on input
 
-data = df[(df["district"].isin(display_dict.keys())) & (df["harm"]==Harm) & (df["category"]==Category)].reset_index()
+data = df[(df["district"].isin(display_dict.keys())) & (df["harm"]==harm) & (df["category"]==category)].reset_index()
 data["Display Name"] = data["district"].map(display_dict)
 
 # ========= Layout
@@ -110,7 +110,7 @@ y_values = ['2007', '2008', '2009', '2010' ,'2011',
             '2012', '2013', '2014', '2015', '2016',
             '2017', '2018', '2019', '2020', '2021']        
 x_values = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
-height = max(data[y_values].max()) + 50
+height = max(data[y_values].max()) + 70
 
 ## Loop through all boroughs and map their values
 for ax in axs:
@@ -181,13 +181,9 @@ fig.text(x_pos, -0.05, footer, fontsize=11, ha='left',va="center",
 #============ 서울시 전체
 #inner = df[(df["Area name"]=="Inner London") & (df["Frequency"]==frequency) & (df["Purpose"]==purpose)]["2021"].iloc[0]
 #outer = df[(df["Area name"]=="Outer London") & (df["Frequency"]==frequency) & (df["Purpose"]==purpose)]["2021"].iloc[0]
-#강동
-#강북
-#서북
-#도심
-Seoul = df[(df["district"]=="seoul") & (df["category"]==Category) & (df["harm"]==Harm)]["2021"].iloc[0]
+Seoul = df[(df["district"]=="seoul") & (df["category"]==category) & (df["harm"]==harm)]["2021"].iloc[0]
 
-fig.text(x_pos, y_pos-0.14,  "2021년 전체: " + ''.format(Seoul), fontsize=15, ha='left',va="top",
+fig.text(x_pos, y_pos-0.14,  "2021년 전체: " + '{:,.0f}'.format(Seoul), fontsize=15, ha='left',va="top",
          fontweight="bold",color=clr_value)
 
 st.pyplot(fig)
@@ -204,7 +200,7 @@ csv = data[['district', 'category','harm','2016', '2017', '2018','2019', '2020',
 st.download_button(
     label="CSV로 데이터 내려받기",
     data=csv,
-    file_name='seoul_car_accident_%s_%s.csv' % (Harm.lower(), Category.lower()),
+    file_name='seoul_car_accident_%s_%s.csv' % (category.lower(), harm.lower()),
     mime='text/csv',
 )
 
@@ -220,5 +216,5 @@ with open("seoul_car_accident.png", "rb") as file:
 
 st.write("")
 st.subheader("About")
-st.markdown("Data source: [Active Lives Survey 2021](https://www.gov.uk/government/statistics/walking-and-cycling-statistics-england-2021)")
-st.markdown("App created by Lisa Hornung. Visit my [website](https://inside-numbers.com/) or follow me on [Github](https://github.com/Lisa-Ho), [Mastodon](https://fosstodon.org/@LisaHornung), [Twitter](https://twitter.com/LisaHornung_).")
+st.markdown("데이터 출처: [서울시 교통사고 현황 (사고유형별) 통계](https://data.seoul.go.kr/dataList/322/S/2/datasetView.do")
+st.markdown("윤준식 제작 [Github](https://github.com/ArubaKLM), Lisa Hornung의 London Cycle Rates Matplot을 참고.")
